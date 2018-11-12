@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+def signup(request):
+    """Define signup pages"""
+
+    context={}
+    
+    return render(request, "partner/signup.html", context)
