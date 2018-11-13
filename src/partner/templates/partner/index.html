@@ -1,0 +1,36 @@
+{% extends "client/base.html" %}
+{% block title %}baemins{% endblock %}
+{% block header %}
+
+{% endblock %}
+{% block body %}
+
+<div class="container">
+    {% if user.is_authenticated %}
+        {% if user.partner %}
+            환영합니다.
+        {% else %}
+            추가 정보를 입력하세요
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div>
+                    <input type="text" name="name">
+                </div>
+                <div>
+                    <input type="text" name="contact">
+                </div>
+                <div>
+                    <input type="text" name="address">
+                </div>
+                <div>
+                    <input type="text" name="description">
+                </div>
+                <button type="submit">저장하기</button>
+            </form>
+        {% endif %}
+    <div>{{ user.username }}님, 안녕하세요!</div>
+    {% else %}
+    <div>로그인 해주세요!</div>
+    {% endif %}
+</div>
+{% endblock %}

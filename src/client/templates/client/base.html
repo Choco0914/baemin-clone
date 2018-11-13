@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,13 +9,13 @@
     <meta name="description" content="This is bamin-clone">
     <meta name="author" content="Choco">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static "client/base.css" %}">
+    <link rel="stylesheet" href="{% static "client/css/base.css" %}">
     <link rel="stylesheet" href="{% static "client/css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "client/css/all.css" %}">
 </head>
 <body>
-    {% block header %}
-    {% endblock %}
+    {% include "./navbar.html" %}
+    <header>{% block header %}            {% endblock %}</header>
     {% block body %}
     {% endblock %}
     <script src="{% static "client/js/bootstrap.min.js" %}"></script>
