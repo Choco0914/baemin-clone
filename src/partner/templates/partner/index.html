@@ -8,27 +8,62 @@
 <div class="container">
     {% if user.is_authenticated %}
         {% if user.partner %}
-            환영합니다.
-        {% else %}
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <table class="table">
+                        <h2>환영합니다.</h2>
+                        <tr>
+                            <th>업체이름</th>
+                            <td>{{ user.partner.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>연락처</th>
+                            <td>{{ user.partner.contact }}</td>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td>{{ user.partner.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>상세 소개</th>
+                            <td>{{ user.partner.description }}</td>
+                        </tr>
+                        
+                        
+                    </table>
+                    <a href="/partner/edit/">
+                    <button class="btn btn-default btn-block" type="submit">
+                        수정하기
+                    </button>
+                </a>
+            </div>
+        </div>
+            {% else %}
+        <div>{{ user.username }}님, 안녕하세요!</div>
             추가 정보를 입력하세요
-            <form method="POST" action="">
-                {% csrf_token %}
-                <div>
-                    <input type="text" name="name">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <!-- <div class="form-group">
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div>
+                            <input type="text" name="contact">
+                        </div>
+                        <div>
+                            <input type="text" name="address">
+                        </div>
+                        <div>
+                            <input type="text" name="description">
+                        </div> -->
+                        
+                        {{ form.as_p }}
+                        <button class="btn btn-default" type="submit">저장하기</button>
+                    </form>
                 </div>
-                <div>
-                    <input type="text" name="contact">
-                </div>
-                <div>
-                    <input type="text" name="address">
-                </div>
-                <div>
-                    <input type="text" name="description">
-                </div>
-                <button type="submit">저장하기</button>
-            </form>
+        </div>
         {% endif %}
-    <div>{{ user.username }}님, 안녕하세요!</div>
     {% else %}
     <div>로그인 해주세요!</div>
     {% endif %}
