@@ -13,8 +13,9 @@ def index(request):
         partner_form = PartnerForm(request.POST)
         if partner_form.is_valid():
             partner = partner_form.save(commit=False)
-            partner.user = reuqest.user
+            partner.user = request.user
             partner.save()
+            return redirect("/partner/")
         else:
             context.update({"form" : partner_form})
 
@@ -64,3 +65,27 @@ def logout_view(request):
     logout(request)
 
     return redirect("/partner/")
+
+def edit_info(request):
+    """Edit partner information"""
+    context = {
+
+    }
+
+    if request.method == "GET":
+        partner_form = PartnerForm(instance=request.user.partner)
+        context.update({"form" : partner_form})
+    elif request.method == "POST":
+        partner_form = PartnerForm(
+            request.POST,
+            instance=request.user.partner,
+            )
+        if partner_form.is_valid():
+            partner = partner_form.save(commit=False)
+            partner.user = request.user
+            partner.save()
+            return redirect("/partner/")
+        else:
+            context.update({"form" : partner_form})
+
+    return render(request, "partner/edit_info.html", context)
